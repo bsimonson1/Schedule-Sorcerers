@@ -1,0 +1,49 @@
+h1 {
+    font-family: 'Nunito';
+    color: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    flex-direction: column; 
+    font-family: 'Nunito', sans-serif;
+    background: url('node_back.png') center no-repeat;
+    background-size: fill;
+    color: #ffffff; 
+}
+
+button {
+    background: #5760d8;
+    color: #fff;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Nunito';
+    font-size: 16px;
+    margin: 5px;
+  }
+
+input {
+    padding: 15px 32px;
+    box-sizing: border-box;
+    background: #eee;
+    border: 0;
+    display: block;
+    background: #fff;
+    border-bottom: 1px solid #eeeeee;
+    font-family: 'Nunito';
+    text-align: center;
+    font-size: 16px;
+    margin: 5px;
+}
+
+#outputStart, #outputEnd, #BFS_s, #BFS_t_s, #BFS_t_m, #DFS_s, #DFS_t_s, #DFS_t_m, #BFS_path{
+    margin: 10px; 
+    font-family: 'Nunito';
+}

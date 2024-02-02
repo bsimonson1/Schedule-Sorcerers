@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wiki Game</title>
+    <!-- Link to CSS file -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Wiki Game</h1>
+    <input type="text" id="startInput" placeholder="Enter starting URL">
+    <input type="text" id="endInput" placeholder="Enter ending URL">
+    <button id="startGameBtn">Start Game</button>
+    
+    <div id="outputStart"></div>
+    <div id="outputEnd"></div>
+
+    <div id="BFS_s"></div>
+    <div id="BFS_t_s"></div>
+    <div id="BFS_t_m"></div>
+
+    <div id="BFS_path"></div>
+
+    <div id="DFS_s"></div>
+    <div id="DFS_t_s"></div>
+    <div id="DFS_t_m"></div>
+
+    <script>
+        document.getElementById("startGameBtn").onclick = function() {
+            const startUrl = document.getElementById("startInput").value;
+            const endUrl = document.getElementById("endInput").value;
+
+            fetch("http://localhost:5000/startGame", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ start: startUrl, end: endUrl }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("outputStart").textContent = "Start: " + data.start;
+                document.getElementById("outputEnd").textContent = "End: " + data.end;
+
+                document.getElementById("BFS_s").textContent = "BFS visited: " + data.bfs_s + " nodes";
+                document.getElementById("BFS_t_s").textContent = "BFS execution time: " + data.bfs_t_s + " seconds";
+                document.getElementById("BFS_t_m").textContent = "BFS execution time: " + data.bfs_t_m + " milliseconds";
+
+                document.getElementById("BFS_path").textContent = "BFS node traversal: " + data.bfs_p;
+
+                document.getElementById("DFS_s").textContent = "DFS visited: " + data.dfs_s + " nodes";
+                document.getElementById("DFS_t_s").textContent = "DFS execution time: " + data.dfs_t_s + " seconds";
+                document.getElementById("DFS_t_m").textContent = "DFS execution time: " + data.dfs_t_m + " milliseconds";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
