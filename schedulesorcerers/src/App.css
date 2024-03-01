@@ -5,15 +5,31 @@
   height: 100vh;
 }
 
+.left-side-bar {
+  width: 70%;
+}
+
 .login-form-container {
   width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin: auto;
 }
 
 .login-form-container h2 {
   margin-bottom: 20px;
+}
+
+.right-side-bar {
+  background-color: #4a5899;
+  width: 30%;
+  height: 100%;
+}
+
+.right-side-bar h2 {
+  color: #fff;
+  text-align: center;
 }
 
 .form-group {
