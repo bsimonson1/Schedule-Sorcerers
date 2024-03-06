@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: linear-gradient(#4a5899 60%, #64b6e0);
+  background-image: linear-gradient(#4a5899 10%, #5788bd 70%, #64b6e0);
 }
 
 .left-side-bar {
@@ -80,7 +80,7 @@ button:hover {
 }
 
 .right-side-bar {
-  background-image: linear-gradient(#4a5899 60%, #64b6e0);
+  background-image: linear-gradient(#4a5899 10%, #5788bd 70%, #64b6e0);
   flex: 1;
   display: flex;
   flex-direction: column;
