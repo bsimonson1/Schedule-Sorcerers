@@ -10,7 +10,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route exact path='/' Component={LoginPage} />
-        <Route path='/home' Component={HomePage} />
+        <Route path='/home' element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
