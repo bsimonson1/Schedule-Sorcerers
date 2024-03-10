@@ -1,7 +1,15 @@
 import React from 'react';
 import './Login.css'; // Import the CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+
+  const navigate = useNavigate();
+
+
+  const loginAuthentication = () => {//we need to actually implement this later
+    navigate("./home");
+  }
   return (
     <div className="login-page-container">
       <div className="right-side-bar">
@@ -23,7 +31,7 @@ const LoginPage = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" />
           </div>
-          <button type="submit">Login</button>
+          <button onClick = {loginAuthentication} type="submit">Login</button>
         </form>
       </div>
     </div>
