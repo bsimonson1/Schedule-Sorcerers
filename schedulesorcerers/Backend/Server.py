@@ -19,26 +19,21 @@ def get_db_connection():
 
 @app.route('/login', methods=['POST'])
 def login():
-    # Get email and password from the request
     email = request.json.get('email')
     password = request.json.get('password')
 
     print("Executing SQL query:")
     print('SELECT * FROM users WHERE email = %s AND pass = %s' % (email, password))
 
-    # Query the database to check if the credentials are valid
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM users WHERE email = %s AND pass = %s', (email, password))
     user = cursor.fetchone()
     conn.close()
 
-    # Check if user exists and password matches
     if user:
-        # Return success response
         return jsonify({'message': 'Login successful', 'user': user}), 200
     else:
-        # Return error response
         return jsonify({'error': 'Invalid email or password'}), 401
 
 if __name__ == '__main__':

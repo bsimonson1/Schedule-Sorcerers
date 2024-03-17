@@ -21,10 +21,8 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Login successful, navigate to home page
         navigate('/home');
       } else {
-        // Login failed, display error message
         setError(data.error);
       }
     } catch (error) {
