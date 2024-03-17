@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, render_template
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -17,15 +17,29 @@ def get_db_connection():
         print("Error connecting to the database:", e)
         return None
 
-@app.route('/')
-def home():
-   conn = get_db_connection()
-   cursor = conn.cursor()
+@app.route('/login', methods=['POST'])
+def login():
+    # Get email and password from the request
+    email = request.json.get('email')
+    password = request.json.get('password')
 
-   cursor.execute('SELECT * FROM users')
-   users = cursor.fetchall()
+    print("Executing SQL query:")
+    print('SELECT * FROM users WHERE email = %s AND pass = %s' % (email, password))
 
-   conn.close()
+    # Query the database to check if the credentials are valid
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users WHERE email = %s AND pass = %s', (email, password))
+    user = cursor.fetchone()
+    conn.close()
+
+    # Check if user exists and password matches
+    if user:
+        # Return success response
+        return jsonify({'message': 'Login successful', 'user': user}), 200
+    else:
+        # Return error response
+        return jsonify({'error': 'Invalid email or password'}), 401
 
 if __name__ == '__main__':
    app.run()
