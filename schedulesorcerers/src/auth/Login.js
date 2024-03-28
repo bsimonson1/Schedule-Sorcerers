@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css'; // Import the CSS file for styling
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [invalidLogin, invalidateLogin] = React.useState(false);
 
-  const handleLogin = (e) => {//we need to actually implement this later
-    e.preventDefault(); // stops the page from refreshing
+  const loginAuthentication = async () => {//we need to actually implement this later
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
 
-    //implement actual authentication here
-    if (email && password){
-      navigate("./home");
-    } else {
-      invalidateLogin(true);
+      if (response.ok) {
+        navigate('/home');
+      } else {
+        setError(data.error);
+        invalidateLogin(true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  }
+  };
 
   return (
     <div className="login-page-container">
       <div className="right-side-bar">
         <h2>Crystal Chrono</h2>
         <div className="small-line-white"/>
-        <p1>Don't have an account? Sign up today!</p1>
+        <p>Don't have an account? Sign up today!</p>
         <button>Sign Up</button>
       </div>
 
@@ -36,14 +49,14 @@ const LoginPage = () => {
         <form onSubmit = {handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
-            <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
           {invalidLogin && <p1 className="error-message">Error: Email or Password is incorrect.</p1>}
-          <button type="submit">Login</button>
+          <button onClick = {loginAuthentication} type="button">Login</button>
         </form>
       </div>
     </div>
