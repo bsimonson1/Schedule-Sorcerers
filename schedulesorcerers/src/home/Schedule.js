@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Views } from 'react-big-calendar';
 
@@ -10,15 +10,16 @@ import EventModal from './EventModal';
 
 const Schedule = () => {
     const [selectedDate, setSelectedDate] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false);
     const [events, setEvents] = useState(ExampleEvents);
+    const dialogRef = useRef(null);
 
     const openModal = () => {
-        setModalOpen(true);
+        if (dialogRef.current) dialogRef.current.close();
+        if (dialogRef.current) dialogRef.current.showModal();
     };
 
     const closeModal = () => {
-        setModalOpen(false);
+        if (dialogRef.current) dialogRef.current.close();
     };
 
     const handleDateSelection = ({start, end}) => {
@@ -27,6 +28,7 @@ const Schedule = () => {
     };
 
     const handleEventConfirmation = (eventName) => {
+        // change this later
         setEvents([
           ...events,
           {
@@ -48,7 +50,12 @@ const Schedule = () => {
             events={events}
             onSelectSlot={handleDateSelection}
           />
-          <EventModal openModal={modalOpen} closeModal={closeModal} onConfirm={handleEventConfirmation }/>
+          <EventModal 
+            dialogRef={dialogRef}
+            openModal={openModal} 
+            closeModal={closeModal} 
+            onConfirm={handleEventConfirmation}
+          />
         </div>
       );
 };
