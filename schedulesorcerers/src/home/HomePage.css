@@ -1,0 +1,9 @@
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 5em); /* Adjust height to fill the screen minus the navbar height */
+    box-sizing: border-box;
+    margin-left: 550px;
+}
