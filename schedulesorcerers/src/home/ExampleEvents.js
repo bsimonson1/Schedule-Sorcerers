@@ -12,7 +12,7 @@ export default [
     id: 1,
     title: 'ex 1',
     start: new Date(2024, 2, 7),
-    end: new Date(2024, 2, 10),
+    end: new Date(2024, 2, 10, 10, 0, 0),
   },
 
   {
@@ -21,9 +21,17 @@ export default [
     start: new Date(2024, 2, 13, 0, 0, 0),
     end: new Date(2024, 2, 20, 0, 0, 0),
   },
+
   {
     id: 3,
     title: 'ex 3',
+    start: new Date(2024, 2, 13, 0, 0, 0),
+    end: new Date(2024, 2, 13, 0, 0, 0),
+  },
+
+  {
+    id: 4,
+    title: 'ex 4',
     start: new Date(2024, 2, 13, 0, 0, 0),
     end: new Date(2024, 2, 13, 0, 0, 0),
   },
