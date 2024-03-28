@@ -8,9 +8,10 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
   const [invalidLogin, invalidateLogin] = React.useState(false);
+  const [handleLogin] = React.useState(false);
 
   const loginAuthentication = async () => {//we need to actually implement this later
     try {
