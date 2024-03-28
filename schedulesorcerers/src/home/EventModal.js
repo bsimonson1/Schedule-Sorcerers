@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './EventModal.css'
 
-const EventModal = ({ openModal, closeModal, onConfirm }) => {
+const EventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
     const [eventName, setEventName] = useState('');
-    const [priority, setPriority] = useState(0);
+    const [priority, setPriority] = useState('');
     const [invalidEventName, invalidateEventName] = React.useState(false);
     
     const handleConfirm = (e) => {
@@ -11,6 +11,7 @@ const EventModal = ({ openModal, closeModal, onConfirm }) => {
             onConfirm(eventName);
             setEventName('');
             invalidateEventName(false);
+            closeModal();
         } else {
             invalidateEventName(true);
         }
@@ -25,7 +26,7 @@ const EventModal = ({ openModal, closeModal, onConfirm }) => {
     return (
         <div className='modal-container'>
             {openModal && (
-                <dialog open className='modal'>
+                <dialog open className='modal'ref={dialogRef}>
                         <h3>Add Event</h3>
                         <div className='form-group'>
                             <label htmlFor="eventName">Event Name:</label>
