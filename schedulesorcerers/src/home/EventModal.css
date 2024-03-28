@@ -1,10 +1,8 @@
 .modal-container {
-    height: 100%;
     width: 100%;
-    z-index: 99999;
 }
 
-.modal {
+.modal [open] {
     display: flex;
     flex-direction: column;
     width: 30%;
