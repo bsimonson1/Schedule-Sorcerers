@@ -8,6 +8,9 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [invalidLogin, invalidateLogin] = React.useState(false);
 
   const loginAuthentication = async () => {//we need to actually implement this later
     try {
@@ -24,6 +27,7 @@ const LoginPage = () => {
         navigate('/home');
       } else {
         setError(data.error);
+        invalidateLogin(true);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -42,7 +46,7 @@ const LoginPage = () => {
       <div className="left-side-bar">
         <h2>Welcome Back!</h2>
         <div className="small-line-purple"/>
-        <form>
+        <form onSubmit = {handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
@@ -51,6 +55,7 @@ const LoginPage = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
+          {invalidLogin && <p1 className="error-message">Error: Email or Password is incorrect.</p1>}
           <button onClick = {loginAuthentication} type="button">Login</button>
         </form>
       </div>
