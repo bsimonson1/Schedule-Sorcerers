@@ -48,6 +48,7 @@ nav {
 
 .visible {
     display: inherit;
+    margin-right:100px;
 }
 
 /* ----- animations--------- */
@@ -91,6 +92,8 @@ nav {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-bottom: 1em;
+    position: absolute;
+    bottom: 0;
 }
 
 .add-calendar-btn:hover {

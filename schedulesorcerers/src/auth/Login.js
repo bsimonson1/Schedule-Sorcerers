@@ -14,7 +14,8 @@ const LoginPage = () => {
   const [handleLogin] = React.useState(false);
 
   const loginAuthentication = async () => {//we need to actually implement this later
-    try {
+    {
+      navigate('/home');/*try {
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -32,7 +33,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-    }
+    } */}
   };
 
   return (
