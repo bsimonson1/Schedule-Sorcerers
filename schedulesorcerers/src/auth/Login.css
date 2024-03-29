@@ -105,7 +105,8 @@
     background-color: #fff;
     width: 70px;
     height: 2px;
-    margin-top: -30px;
+    margin-top: 30px;
+    margin-bottom:10px;
     border-radius: 2px;
   }
   
@@ -125,6 +126,7 @@
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
   }
   
   .right-side-bar button:hover {

@@ -12,24 +12,25 @@ const HomePage = () => {
     const onChange = (newDate) => {
         setDate(newDate);
     };
-   
 
     const toggleNavbar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
 
+    // Calculate the left margin for the main content based on the navbar state
+    const mainContentStyle = {
+        marginLeft: isNavbarOpen ? '250px' : '0', // Adjust '250px' to match the width of your navbar
+    };
+
     return (
         <div className="container">
             <Navbar isOpen={isNavbarOpen} toggleNavbar={toggleNavbar} />
-            <div className="main-content">
-                <Calendar onChange={onChange} value={date} />
-                <p>Selected date: {date.toDateString()}</p>
-        <div className="homepage-container">
-            <div className="top-bar">put menu, exp, etc. here</div>
-            {/*<Calendar onChange={onChange} value={date} />*/}
-            {/*<p>Selected date: {date.toDateString()}</p>*/}
-            <div className='calendar-container'>
-                <Schedule/>
+         
+            <div className="homepage-container" style={mainContentStyle}>
+                <div className="top-bar">put menu, exp, etc. here</div>
+                <div className='calendar-container'>
+                    <Schedule/>
+                </div>
             </div>
         </div>
     );
