@@ -1,8 +1,18 @@
 .modal-container {
+    position: fixed;
     width: 100%;
 }
 
-.modal [open] {
+dialog {
+    flex-direction: column;
+    width: 30%;
+    border-radius: 20px;
+    border: 1.5px solid #ccc;
+    justify-content: center;
+    align-items: center;
+}
+
+dialog:open {
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -14,6 +24,13 @@
 
 .modal h3 {
     text-align: center;
+}
+
+.modal-body-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-group {
