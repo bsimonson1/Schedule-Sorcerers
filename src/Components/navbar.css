@@ -49,6 +49,7 @@ nav {
 .visible {
     display: inherit;
     margin-right:100px;
+    z-index: 5;
 }
 
 /* ----- animations--------- */
