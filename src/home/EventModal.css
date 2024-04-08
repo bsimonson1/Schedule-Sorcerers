@@ -10,6 +10,7 @@ dialog {
     border: 1.5px solid #ccc;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 dialog:open {
@@ -20,6 +21,7 @@ dialog:open {
     border: 1.5px solid #ccc;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 .modal h3 {
@@ -35,7 +37,8 @@ dialog:open {
 
 .form-group {
     width: 90%;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 10px;
   }
 
   label {
@@ -44,11 +47,12 @@ dialog:open {
   }
   
   input {
-    width: calc(100% - 22px);;
+    width: 100%;;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    margin-bottom: 10px;
   }
 
 .button-group {
