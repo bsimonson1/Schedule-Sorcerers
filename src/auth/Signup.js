@@ -15,6 +15,14 @@ const SignupPage = () => {
 
   const signupAuthentication = async () => {//we need to actually implement this later
     try {
+      const sendlogin = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -22,6 +30,7 @@ const SignupPage = () => {
         },
         body: JSON.stringify({ email, password })
       });
+
       const data = await response.json();
 
       if (response.ok) {
@@ -40,7 +49,7 @@ const SignupPage = () => {
       <div className="left-side-bar">
         <h2>Welcome!</h2>
         <div className="small-line-purple"/>
-        <form onSubmit = {handleLogin}>
+        <form onSubmit = {handleSignup}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
@@ -57,4 +66,4 @@ const SignupPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;

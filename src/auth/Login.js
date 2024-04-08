@@ -15,7 +15,8 @@ const LoginPage = () => {
 
   const loginAuthentication = async () => {//we need to actually implement this later
     {
-      navigate('/home');/*try {
+      // navigate('/home');
+      try {
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -33,7 +34,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-    } */}
+    } }
   };
 
   return (
@@ -43,7 +44,7 @@ const LoginPage = () => {
         <div className="small-line-white"/>
         <p>Don't have an account? Sign up today!</p>
         <button onClick={() => {
-            navigate("/Signup.js");
+            navigate("/signup");
           }}> Sign Up</button>
       </div>
 
