@@ -1,16 +1,23 @@
-.container {
-    display: flex;
-    flex-direction: column;
-}
-
-.homepage-container {
+.main-content {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 5em); /* Adjust height to fill the screen minus the navbar height */
+    box-sizing: border-box;
+}
+.homepage-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 5em);
-    margin-top: 1em;
+    height: 100vh;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    height: 10%;
 }
 
 .calendar-container {
