@@ -26,8 +26,7 @@ const HomePage = () => {
         <div className="container">
             <Navbar isOpen={isNavbarOpen} toggleNavbar={toggleNavbar} />
          
-            <div className="homepage-container" style={mainContentStyle}>
-                <div className="top-bar">put menu, exp, etc. here</div>
+            <div className="homepage-container">
                 <div className='calendar-container'>
                     <Schedule/>
                 </div>
