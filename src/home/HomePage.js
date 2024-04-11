@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import Navbar from '../Components/navbar'; // Adjust the import path if necessary
+import Navbar from '../Components/navbar'; 
 import './HomePage.css';
 
 import Schedule from './Schedule';
@@ -17,9 +17,9 @@ const HomePage = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
 
-    // Calculate the left margin for the main content based on the navbar state
+    
     const mainContentStyle = {
-        marginLeft: isNavbarOpen ? '250px' : '0', // Adjust '250px' to match the width of your navbar
+        marginLeft: isNavbarOpen ? '250px' : '0', 
     };
 
     return (
