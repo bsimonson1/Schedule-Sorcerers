@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './EventModal.css'
 
-const EventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
+const AddEventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
     const [eventName, setEventName] = useState('');
     const [priority, setPriority] = useState('');
     const [invalidEventName, invalidateEventName] = React.useState(false);
@@ -55,4 +55,4 @@ const EventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
     );
 };
 
-export default EventModal;
+export default AddEventModal;
