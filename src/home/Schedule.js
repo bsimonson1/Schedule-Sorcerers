@@ -5,41 +5,74 @@ import { Views } from 'react-big-calendar';
 import './Schedule.css';
 import Calendar from './Calendar';
 import ExampleEvents from './ExampleEvents';
-import EventModal from './EventModal';
+import AddEventModal from '../Components/AddEventModal';
+import DeleteEventModal from '../Components/DeleteEventModal';
 
 
 const Schedule = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [events, setEvents] = useState(ExampleEvents);
-    const dialogRef = useRef(null);
+    const dialogRefAdd = useRef(null);
+    const dialogRefDelete = useRef(null);
+    const [currentEvent, setCurrentEvent] = useState(events[0]);
 
+    /*THIS SECTION IS FOR ADDING THE EVENTS*/
     const openModal = () => {
-        if (dialogRef.current) dialogRef.current.close();
-        if (dialogRef.current) dialogRef.current.showModal();
+      if (dialogRefAdd.current) dialogRefAdd.current.close();
+      if (dialogRefAdd.current) dialogRefAdd.current.showModal();
     };
 
     const closeModal = () => {
-        if (dialogRef.current) dialogRef.current.close();
+      if (dialogRefAdd.current) dialogRefAdd.current.close();
     };
 
     const handleDateSelection = ({start, end}) => {
-        setSelectedDate({start, end});
-        openModal();
+      setSelectedDate({start, end});
+      openModal();
     };
 
     const handleEventConfirmation = (eventName) => {
-        // change this later
-        setEvents([
-          ...events,
-          {
-            id: events.length + 1,
-            title: eventName,
-            start: selectedDate.start,
-            end: selectedDate.end,
-          },
-        ]);
-        closeModal();
-      };
+      // change this later
+      setEvents([
+        ...events,
+        {
+          id: events.length + 1,
+          title: eventName,
+          start: selectedDate.start,
+          end: selectedDate.end,
+        },
+      ]);
+      closeModal();
+    };
+
+    /* THIS SECTION IS FOR DELETING EVENTS */
+    const openDeleteModal = () => {
+      if (dialogRefDelete.current) dialogRefDelete.current.close();
+      if (dialogRefDelete.current) dialogRefDelete.current.showModal();
+    };
+
+    const closeDeleteModal = () => {
+        if (dialogRefDelete.current) dialogRefDelete.current.close();
+    };
+
+    const handleEventSelection = (event) => {
+      setCurrentEvent(event);
+      openDeleteModal();
+    };
+
+    const handleEventDeletion = () => {
+      //fix later
+      const newEvents = events.filter((event) => event.id !== currentEvent.id);
+      setEvents(newEvents);
+      closeDeleteModal();
+    };
+
+    const handleEventCompletion = () => {
+      //fix later
+      const newEvents = events.filter((event) => event.id !== currentEvent.id);
+      setEvents(newEvents);
+      closeDeleteModal();
+    };
 
     return (
         <div className="calendar-container">
@@ -49,12 +82,21 @@ const Schedule = () => {
             selectable={true}
             events={events}
             onSelectSlot={handleDateSelection}
+            onSelectEvent={handleEventSelection}
           />
-          <EventModal 
-            dialogRef={dialogRef}
+          <AddEventModal 
+            dialogRef={dialogRefAdd}
             openModal={openModal} 
             closeModal={closeModal} 
             onConfirm={handleEventConfirmation}
+          />
+          <DeleteEventModal
+            dialogRef={dialogRefDelete}
+            openModal={openDeleteModal} 
+            closeModal={closeDeleteModal} 
+            onDelete={handleEventDeletion}
+            onComplete={handleEventCompletion}
+            eventName={currentEvent.title}
           />
         </div>
       );

@@ -77,3 +77,19 @@ dialog:open {
     background-color: #fff;
     color: #4a5899;
   }
+
+  .modal-body-container p {
+    margin-top: 2%;
+  }
+
+  .close {
+    background-color: transparent !important;
+    color: #4a5899 !important;
+    font-weight: bold !important;
+    font-size: larger !important;
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    margin-top: -2% !important;
+  }
