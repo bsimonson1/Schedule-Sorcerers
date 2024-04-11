@@ -1,37 +1,61 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS 
-import subprocess
+from bson import ObjectId  # Import ObjectId from bson module
+from pymongo import MongoClient
+import pymongo
+from bson import json_util
 
 app = Flask(__name__)
-CORS(app) 
 
-@app.route('/startGame', methods=['POST'])
-def start_game():
-    data = request.json
-    start_url = data['start']
-    end_url = data['end']
+client = pymongo.MongoClient("mongodb+srv://ben:schedulesorcerer1@schedulesorcerery.b4wjqxl.mongodb.net/?retryWrites=true&w=majority")
+db = client["UserInformation"]
+login_collection = db["LoginSignupInfo"]
+schedule_collection = db["ScheduleInfo"]
 
-    result = subprocess.run(["C:\\Users\\bengs\\OneDrive\\Desktop\\WikiWander\\main.exe", start_url, end_url],
-                            capture_output=True, text=True)
-    
-    if result.returncode != 0:
-        return jsonify({"error": result.stderr}), 500
+global global_email
 
-    output = result.stdout.splitlines()
-    if len(output) >= 6:
-        start_url = output[0]
-        end_url = output[1]
-        BFS_size = output[2]
-        BFS_time_s = output[3]
-        BFS_time_m = output[4]
-        DFS_size = output[5]
-        DFS_time_s = output[6]
-        DFS_time_m = output[7]
-        BFS_path = output[8]
+@app.route('/login', methods=['POST'])
+def login():
+    global global_email
+    email = request.json.get('email')
+    password = request.json.get('password')
 
-        return jsonify(start=start_url, end=end_url, bfs_s=BFS_size, bfs_t_s=BFS_time_s, bfs_t_m=BFS_time_m, dfs_s=DFS_size, dfs_t_s=DFS_time_s, dfs_t_m=DFS_time_m, bfs_p=BFS_path)
+    user = login_collection.find_one({'email': email, 'password': password})
+
+    if user:
+        user['_id'] = str(user['_id'])
+        global_email = email
+        return jsonify({'message': 'Login successful', 'user': user}), 200
     else:
-        return jsonify({"error": "Invalid output format from C++ program"}), 500
+        return jsonify({'error': 'Invalid email or password'}), 401
+    
+@app.route('/signup', methods=['POST'])
+def signup():
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    login_collection.insert_one({'email': email, 'password': password})
+
+    return jsonify({'message': 'Signup successful'}), 200
+
+@app.route('/schedule_update', methods=['POST'])
+def schedule_update():
+    global global_email
+    data = request.json
+    eventName = data.get('eventName')
+    priority = data.get("priority")
+
+    schedule_collection.insert_one({"email": global_email, "eventName": eventName, "priority": priority})
+
+    return jsonify({'message': 'Database updated'}), 200
+
+@app.route('/get_events', methods=['GET'])
+def get_events():
+    global global_email
+    events = list(schedule_collection.find({'email': global_email}))
+    for event in events:
+        event['_id'] = str(event['_id'])
+    serialized_events = json_util.dumps({'events': events})
+    return serialized_events, 200
 
 if __name__ == '__main__':
-    app.run(port=5000)
+   app.run()
