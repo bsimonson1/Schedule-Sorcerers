@@ -11,7 +11,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 5em);
+    margin-top: 1em;
 }
 
 .top-bar {
