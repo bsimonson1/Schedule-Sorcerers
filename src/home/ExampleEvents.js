@@ -13,6 +13,7 @@ export default [
     title: 'ex 1',
     start: new Date(2024, 2, 7),
     end: new Date(2024, 2, 10, 10, 0, 0),
+    priority: 1,
   },
 
   {
@@ -20,6 +21,7 @@ export default [
     title: 'ex 2',
     start: new Date(2024, 2, 13, 0, 0, 0),
     end: new Date(2024, 2, 20, 0, 0, 0),
+    priority: 1,
   },
 
   {
@@ -27,6 +29,7 @@ export default [
     title: 'ex 3',
     start: new Date(2024, 2, 13, 0, 0, 0),
     end: new Date(2024, 2, 13, 0, 0, 0),
+    priority: 1,
   },
 
   {
@@ -34,5 +37,6 @@ export default [
     title: 'ex 4',
     start: new Date(2024, 2, 13, 0, 0, 0),
     end: new Date(2024, 2, 13, 0, 0, 0),
+    priority: 1,
   },
 ]

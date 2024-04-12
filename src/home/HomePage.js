@@ -6,12 +6,7 @@ import './HomePage.css';
 import Schedule from './Schedule';
 
 const HomePage = () => {
-    const [date, setDate] = useState(new Date());
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-
-    const onChange = (newDate) => {
-        setDate(newDate);
-    };
 
     const toggleNavbar = () => {
         setIsNavbarOpen(!isNavbarOpen);
