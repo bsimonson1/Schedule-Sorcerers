@@ -1,0 +1,22 @@
+.progress-bar-container {
+    height: 20px;
+    width: 100%;
+    background-color: #e0e0de;
+    border-radius: 50px;
+    margin: 50px 0;
+}
+
+.filler {
+    height: 100%;
+    border-radius: inherit;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px; /* Add padding to the right for the label */
+}
+
+.label {
+    color: white;
+    font-weight: bold;
+}

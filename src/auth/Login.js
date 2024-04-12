@@ -15,26 +15,27 @@ const LoginPage = () => {
 
   const loginAuthentication = async () => {//we need to actually implement this later
     {
-      // navigate('/home');
-      try {
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await response.json();
+       navigate('/home');
+    //   try {
+    //   const response = await fetch('/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ email, password })
+    //   });
+    //   const data = await response.json();
 
-      if (response.ok) {
-        navigate('/home');
-      } else {
-        setError(data.error);
-        invalidateLogin(true);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } }
+    //   if (response.ok) {
+    //     navigate('/home');
+    //   } else {
+    //     setError(data.error);
+    //     invalidateLogin(true);
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
+   }
   };
 
   return (
