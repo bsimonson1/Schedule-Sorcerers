@@ -1,6 +1,4 @@
 from flask import Flask, request, jsonify
-from bson import ObjectId  # Import ObjectId from bson module
-from pymongo import MongoClient
 import pymongo
 
 app = Flask(__name__)
@@ -27,7 +25,7 @@ def signup():
     email = request.json.get('email')
     password = request.json.get('password')
 
-    login_collection.insert_one({'email': email, 'password': password})
+    login_collection.insert_one({'email': email, 'password': password, 'experience': 0})
 
     return jsonify({'message': 'Signup successful'}), 200
 
