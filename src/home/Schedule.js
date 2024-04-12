@@ -31,7 +31,7 @@ const Schedule = () => {
       openModal();
     };
 
-    const handleEventConfirmation = (eventName) => {
+    const handleEventConfirmation = ({eventName, priority}) => {
       // change this later
       setEvents([
         ...events,
@@ -40,6 +40,7 @@ const Schedule = () => {
           title: eventName,
           start: selectedDate.start,
           end: selectedDate.end,
+          priority: priority,
         },
       ]);
       closeModal();
@@ -74,6 +75,11 @@ const Schedule = () => {
       closeDeleteModal();
     };
 
+    const calculateExp = (event) => {
+      //fix later
+      return (event.priority * (event.end - event.start) / (3600*1000));
+    }
+
     return (
         <div className="calendar-container">
           <Calendar
@@ -97,6 +103,8 @@ const Schedule = () => {
             onDelete={handleEventDeletion}
             onComplete={handleEventCompletion}
             eventName={currentEvent.title}
+            eventPriority={currentEvent.priority}
+            eventExp={calculateExp(currentEvent)}
           />
         </div>
       );
