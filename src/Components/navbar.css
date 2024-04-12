@@ -10,8 +10,10 @@ nav {
     background-color: rgb(37, 39, 53);
     display: flex;
     justify-content: flex-start;
+    flex-direction: row;
     padding: 1em;
 }
+
 
 .burger-menu {
     height: 100%;
@@ -98,5 +100,25 @@ nav {
 }
 
 .add-calendar-btn:hover {
+    background-color: #c61414;
+}
+
+.leaderboard-btn {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    background-color: #c04e0d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 1em;
+    position: relative;
+    bottom: 0;
+}
+
+.leaderboard-btn:hover {
     background-color: #c61414;
 }
