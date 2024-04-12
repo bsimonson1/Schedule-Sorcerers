@@ -3,12 +3,22 @@ import './EventModal.css'
 
 const AddEventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
     const [eventName, setEventName] = useState('');
-    const [priority, setPriority] = useState('');
+    const [priority, setPriority] = useState(1);
     const [invalidEventName, invalidateEventName] = React.useState(false);
     
+    const handlePriority = (e) => {
+        if (e.target.value === '2'){
+            setPriority(2);
+        } else if (e.target.value === '.5'){
+            setPriority(.5);
+        } else {
+            setPriority(1);
+        }
+    };
+
     const handleConfirm = (e) => {
         if (eventName){
-            onConfirm(eventName);
+            onConfirm({eventName, priority});
             setEventName('');
             invalidateEventName(false);
             closeModal();
@@ -37,10 +47,10 @@ const AddEventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
                                     onChange={(e) => setEventName(e.target.value)}
                                 />
                                 <label htmlFor="priority">Priority:</label>
-                                <select>
-                                    <option value="2">High</option>
-                                    <option value="1" selected>Medium</option>
-                                    <option value=".5">Low</option>
+                                <select value={priority} onChange={handlePriority}>
+                                    <option value='2'>High</option>
+                                    <option value='1' selected>Medium</option>
+                                    <option value='.5'>Low</option>
                                 </select>
                             </div>
                             {invalidEventName && <p1 className="error-message">Please input an event name.</p1>}

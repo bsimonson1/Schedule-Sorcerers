@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './EventModal.css'
 
-const DeleteEventModal = ({ dialogRef, openModal, closeModal, onDelete, onComplete, eventName }) => {
+const DeleteEventModal = ({ dialogRef, openModal, closeModal, onDelete, onComplete, eventName, eventPriority, eventExp }) => {
     return (
         <div className='modal-container'>
             {openModal && (
@@ -9,8 +9,8 @@ const DeleteEventModal = ({ dialogRef, openModal, closeModal, onDelete, onComple
                     <button className='close' onClick={closeModal}>x</button>
                     <h3>{eventName}</h3>
                     <div className='modal-body-container'>
-                        <p>Priority: </p>
-                        <p>Exp. Points: </p>
+                        <p>Priority: {eventPriority}</p>
+                        <p>Exp. Points: {eventExp}</p>
                         <div className='button-group'>
                             <button onClick={onDelete}>Delete</button>
                             <button onClick={onComplete}>Mark Completed</button>
