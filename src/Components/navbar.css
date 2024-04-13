@@ -81,7 +81,39 @@ nav {
 {
     color:white;
     margin:auto;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.experienceBar p {
+    width: 60%;
+}
+
+progress {
+    height: 10px;
+    width: 100%;
+    background-color: white;
+    border-radius: 50px;
+}
+
+progress::-moz-progress-bar {
+    background-color: #4a5899;
+}  
+
+/*for non-firefox browsers*/
+progress::-webkit-progress-bar {
+    height: 10px;
+    width: 100%;
+    background-color: white;
+    border-radius: 50px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #4a5899;
+    border-radius: 50px;
+} 
 
 .add-calendar-btn {
     display: block;
@@ -122,3 +154,4 @@ nav {
 .leaderboard-btn:hover {
     background-color: #c61414;
 }
+
