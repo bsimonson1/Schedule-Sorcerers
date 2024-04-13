@@ -11,7 +11,7 @@ const AddEventModal = ({ dialogRef, openModal, closeModal, onConfirm }) => {
         setPriority(value);
     };
 
-    const handleConfirm = (e) => {
+    const handleConfirm = () => {
         if (eventName){
             onConfirm({eventName, priority});
             setEventName('');

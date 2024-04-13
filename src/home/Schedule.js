@@ -9,12 +9,13 @@ import AddEventModal from '../Components/AddEventModal';
 import DeleteEventModal from '../Components/DeleteEventModal';
 
 
-const Schedule = () => {
+const Schedule = ({changeExpValue}) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [events, setEvents] = useState(ExampleEvents);
     const dialogRefAdd = useRef(null);
     const dialogRefDelete = useRef(null);
     const [currentEvent, setCurrentEvent] = useState(events[0]);
+    const [totalExp, setTotalExp] =useState(0); //replace later
 
     /*THIS SECTION IS FOR ADDING THE EVENTS*/
     const openModal = () => {
@@ -70,6 +71,9 @@ const Schedule = () => {
 
     const handleEventCompletion = () => {
       //fix later
+      const newTotalExp = totalExp + calculateExp(currentEvent);
+      setTotalExp(newTotalExp);
+      changeExpValue(newTotalExp);
       const newEvents = events.filter((event) => event.id !== currentEvent.id);
       setEvents(newEvents);
       closeDeleteModal();
