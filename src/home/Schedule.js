@@ -80,7 +80,11 @@ const Schedule = ({changeExpValue}) => {
     };
 
     const calculateExp = (event) => {
-      //fix later
+      //replace with actual exp per task calculation later
+      //if statement for events with the same start/end time
+      if (event.end - event.start === 0){
+        return (event.priority);
+      }
       return (event.priority * (event.end - event.start) / (3600*1000));
     }
 

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './navbar.css';
 import ProgressBar from '../Components/ProgressBar'
-const Navbar = ({expValue}) => {
+const Navbar = ({expValue, level}) => {
 
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -11,6 +11,7 @@ const Navbar = ({expValue}) => {
     const testData = [
         { bgcolor: "#4a5899", completed: expValue }, //color of filling of experience bar
       ];
+
     // toggle burger menu change
     const updateMenu = () => {
         if(!isMenuClicked) {
@@ -33,7 +34,7 @@ const Navbar = ({expValue}) => {
                     <div className={burger_class}></div>
                 </div>
                 <div className="experienceBar">
-                    <p>Exp: {expValue}/100</p>
+                    <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
                     <progress id="exp" max="100" value={expValue}/>
                     {/*testData.map((item, idx) => (
                     <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />

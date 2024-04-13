@@ -81,14 +81,14 @@ nav {
 {
     color:white;
     margin:auto;
-    width: 350px;
+    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .experienceBar p {
-    width: 40%;
+    width: 60%;
 }
 
 progress {
