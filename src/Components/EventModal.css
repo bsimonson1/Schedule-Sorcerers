@@ -1,0 +1,95 @@
+.modal-container {
+    position: fixed;
+    width: 100%;
+}
+
+dialog {
+    flex-direction: column;
+    width: 30%;
+    border-radius: 20px;
+    border: 1.5px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+dialog:open {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border-radius: 20px;
+    border: 1.5px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.modal h3 {
+    text-align: center;
+}
+
+.modal-body-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    width: 90%;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+  .modal button {
+    margin-top: 20px;
+    width: 150px;
+    padding: 10px;
+    border: 1.5px solid #4a5899;
+    border-radius: 20px;
+    background-color: #4a5899;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #fff;
+    color: #4a5899;
+  }
+
+  .modal-body-container p {
+    margin-top: 2%;
+  }
+
+  .close {
+    background-color: transparent !important;
+    color: #4a5899 !important;
+    font-weight: bold !important;
+    font-size: larger !important;
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    margin-top: -2% !important;
+  }
