@@ -60,12 +60,13 @@ return (
                 <div className="experienceBar">
                     <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
                     <progress id="exp" max="100" value={expValue}/>
-                    {/*testData.map((item, idx) => (
+                    /*{/*testData.map((item, idx) => (
                     <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
                     ))*/}
-                </div>
+                
                     <ProgressBar bgcolor="#6a1b9a" experience={experience} />
                 </div>
+                {/*</div>*/}
             </nav>
 
             <div className={menu_class}>
