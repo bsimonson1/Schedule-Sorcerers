@@ -7,6 +7,11 @@ const Navbar = () => {
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+    const testData = [
+        { bgcolor: "#4a5899", completed: expValue }, //color of filling of experience bar
+      ];
+
     const [experience, setExperience] = useState(0);
    
     // toggle burger menu change
@@ -53,6 +58,12 @@ return (
                     <div className={burger_class}></div>
                 </div>
                 <div className="experienceBar">
+                    <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
+                    <progress id="exp" max="100" value={expValue}/>
+                    {/*testData.map((item, idx) => (
+                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                    ))*/}
+                </div>
                     <ProgressBar bgcolor="#6a1b9a" experience={experience} />
                 </div>
             </nav>
