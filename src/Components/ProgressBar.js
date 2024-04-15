@@ -2,7 +2,7 @@ import React from 'react';
 import './ProgressBar.css';
 
 const ProgressBar = (props) => {
-    const { bgcolor, completed } = props;
+    const { bgcolor, experience } = props;
 
     const containerStyles = {
         height: '20px',
@@ -14,8 +14,8 @@ const ProgressBar = (props) => {
 
     return (
         <div style={containerStyles}>
-            <div className="filler" style={{ width: `${completed}%`, backgroundColor: bgcolor }}>
-                <span className="label">{`${completed}`}</span>
+            <div className="filler" style={{ width: `${experience}%`, backgroundColor: bgcolor }}>
+                <span className="label">{`${experience}`}</span>
             </div>
         </div>
     );

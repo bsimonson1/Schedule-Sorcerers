@@ -8,7 +8,7 @@ import Schedule from './Schedule';
 const HomePage = () => {
     const [date, setDate] = useState(new Date());
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-
+    fetchExperience();
     const onChange = (newDate) => {
         setDate(newDate);
     };
