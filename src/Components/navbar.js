@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import './navbar.css';
-import ProgressBar from '../Components/ProgressBar'
+import { useNavigate } from 'react-router-dom';
 const Navbar = ({expValue, level}) => {
 
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
-
+    const navigate = useNavigate();
     const testData = [
         { bgcolor: "#4a5899", completed: expValue }, //color of filling of experience bar
       ];
@@ -36,9 +36,6 @@ const Navbar = ({expValue, level}) => {
                 <div className="experienceBar">
                     <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
                     <progress id="exp" max="100" value={expValue}/>
-                    {/*testData.map((item, idx) => (
-                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                    ))*/}
                 </div>
             </nav>
 
@@ -50,7 +47,9 @@ const Navbar = ({expValue, level}) => {
                     </div>
                 </div>
                 <button className="add-calendar-btn">Add Calendar</button>
-                <button className="leaderboard-btn">Leaderboard</button>
+                <button className="leaderboard-btn" onClick={() => {
+            navigate("/leaderboard");
+          }}>Leaderboard</button>
             </div>
         </div>
     );
