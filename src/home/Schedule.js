@@ -77,6 +77,7 @@ const Schedule = ({changeExpValue}) => {
       const newEvents = events.filter((event) => event.id !== currentEvent.id);
       setEvents(newEvents);
       closeDeleteModal();
+      
     };
 
     const calculateExp = (event) => {

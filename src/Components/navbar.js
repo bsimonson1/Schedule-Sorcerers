@@ -1,18 +1,42 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import './navbar.css';
+
 import { useNavigate } from 'react-router-dom';
 const Navbar = ({expValue, level}) => {
 
+const Navbar = ({ userEmail, userPassword }) => {
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
-    const navigate = useNavigate();
-    const testData = [
-        { bgcolor: "#4a5899", completed: expValue }, //color of filling of experience bar
-      ];
+    const level = 0;
+    const [experience, setExperience] = useState(0);
+   
+    useEffect(() => {
+        const fetchExperience = async () => {
+            try {
+                const response = await fetch('/grab_exp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        email: userEmail, 
+                        password: userPassword 
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setExperience(data.experience);
+                } else {
+                    console.error('Failed to fetch experience:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+    
+        fetchExperience();
+    }, [userEmail, userPassword]);
 
-    // toggle burger menu change
     const updateMenu = () => {
         if(!isMenuClicked) {
             setBurgerClass("burger-bar clicked");
@@ -25,8 +49,8 @@ const Navbar = ({expValue, level}) => {
         setIsMenuClicked(!isMenuClicked);
     };
 
-    return(
-        <div> {/* Removed the height style */}
+    return (
+        <div>
             <nav>
                 <div className="burger-menu" onClick={updateMenu}>
                     <div className={burger_class}></div>
@@ -40,7 +64,7 @@ const Navbar = ({expValue, level}) => {
             </nav>
 
             <div className={menu_class}>
-            <div className="sidebar-top-section">
+                <div className="sidebar-top-section">
                     <div className="username-settings">
                         <div className="username">Username</div>
                         <div className ="cogWheel"></div>
