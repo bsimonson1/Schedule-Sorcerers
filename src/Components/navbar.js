@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import './navbar.css';
 
 import { useNavigate } from 'react-router-dom';
-const Navbar = ({expValue, userEmail, userPassword}) => {
+const Navbar = ({expValue, level, userEmail, userPassword}) => {
     const navigate = useNavigate();
 
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
-    const level = 0;
+    const userLevel = level;
     const [experience, setExperience] = useState(0);
    
     useEffect(() => {
@@ -58,7 +58,7 @@ const Navbar = ({expValue, userEmail, userPassword}) => {
                     <div className={burger_class}></div>
                 </div>
                 <div className="experienceBar">
-                    <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
+                    <p><b>Level:</b> {userLevel} / <b>Exp:</b> {expValue}/100</p>
                     <progress id="exp" max="100" value={expValue}/>
                 </div>
             </nav>
