@@ -15,33 +15,33 @@ const HomePage = () => {
     const [setDate] = useState(0);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchExperience = async () => {
-          try {
-            // Retrieve email and password from local storage
-            const storedEmail = localStorage.getItem('email');
-            // No need to store or retrieve password in the client
-            const response = await fetch(`http://localhost:5001/grab?email=${storedEmail}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              credentials: 'include', // Ensure that cookies are sent with the request
-            });
-            if (response.ok) {
-              const data = await response.json();
-              setTotalExp(data.experience);
-            } else {
-              setError('Failed to fetch experience');
-            }
-          } catch (error) {
-            console.error('Error:', error);
-            setError('Failed to fetch experience');
-          }
-        };
-      
-        fetchExperience();
-      }, []);
+    // useEffect(() => {
+    //   const fetchExperience = async () => {
+    //     try {
+    //       // retrieve email
+    //       const storedEmail = localStorage.getItem('email');
+    //       // fetch providing the stored sessin email
+    //       const response = await fetch(`http://127.0.0.1:5000/grab?email=${storedEmail}`, {
+    //         method: 'GET',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         credentials: 'include', // cookies from the respective user
+    //       });
+    //       if (response.ok) {
+    //         const data = await response.json();
+    //         setTotalExp(data.experience);
+    //       } else {
+    //         setError('Failed to fetch experience');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error:', error);
+    //       setError('Failed to fetch experience');
+    //     }
+    //   };
+    
+    //   fetchExperience();
+    // }, []);
 
     useEffect(() => {
         setTotalExp(exp || 0);
