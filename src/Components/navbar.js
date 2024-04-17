@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './navbar.css';
-import ProgressBar from '../Components/ProgressBar';
+
+import { useNavigate } from 'react-router-dom';
+const Navbar = ({expValue, level}) => {
 
 const Navbar = ({ userEmail, userPassword }) => {
     // to change burger classes
@@ -56,9 +58,8 @@ const Navbar = ({ userEmail, userPassword }) => {
                     <div className={burger_class}></div>
                 </div>
                 <div className="experienceBar">
-                    <p><b>Level:</b> {level} / <b>Exp:</b> {experience}/100</p>
-                    <progress id="exp" max="100" value={experience}/>
-                    <ProgressBar bgcolor="#6a1b9a" completed={experience} />
+                    <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
+                    <progress id="exp" max="100" value={expValue}/>
                 </div>
             </nav>
 
@@ -70,7 +71,9 @@ const Navbar = ({ userEmail, userPassword }) => {
                     </div>
                 </div>
                 <button className="add-calendar-btn">Add Calendar</button>
-                <button className="leaderboard-btn">Leaderboard</button>
+                <button className="leaderboard-btn" onClick={() => {
+            navigate("/leaderboard");
+          }}>Leaderboard</button>
             </div>
         </div>
     );
