@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import './Login.css'; // Import the CSS file for styling
+import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = ({ userEmail, userPassword }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // const [email, setEmail] = React.useState('');
-  // const [password, setPassword] = React.useState('');
-  const [invalidLogin, invalidateLogin] = React.useState(false);
-  const [handleLogin] = React.useState(false);
-
-  const loginAuthentication = async () => {//we need to actually implement this later
-    {
-      //  navigate('/home');
-      try {
+  const loginAuthentication = async () => {
+    try {
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -25,17 +18,27 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password })
       });
       const data = await response.json();
-
+  
       if (response.ok) {
-        navigate('/home');
+        const { exp } = data;
+        
+        const expResponse = await fetch('/grab_exp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            email,  
+            password
+          }
+        });
+        const expData = await expResponse.json();
+        const totalExp = expData.experience || 0;
+        navigate(`/home?exp=${totalExp}`);
       } else {
         setError(data.error);
-        invalidateLogin(true);
       }
     } catch (error) {
       console.error('Error:', error);
     }
-   }
   };
 
   return (
@@ -44,15 +47,13 @@ const LoginPage = () => {
         <h2>Crystal Chrono</h2>
         <div className="small-line-white"/>
         <p>Don't have an account? Sign up today!</p>
-        <button onClick={() => {
-            navigate("/signup");
-          }}> Sign Up</button>
+        <button onClick={() => navigate("/signup")}> Sign Up</button>
       </div>
 
       <div className="left-side-bar">
         <h2>Welcome Back!</h2>
         <div className="small-line-purple"/>
-        <form onSubmit = {handleLogin}>
+        <form>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
@@ -61,8 +62,8 @@ const LoginPage = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
-          {invalidLogin && <p1 className="error-message">Error: Email or Password is incorrect.</p1>}
-          <button onClick = {loginAuthentication} type="button">Login</button>
+          {error && <p className="error-message">{error}</p>}
+          <button onClick={loginAuthentication} type="button">Login</button>
         </form>
       </div>
     </div>

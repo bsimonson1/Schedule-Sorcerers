@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-CORS(app, origins='http://localhost:3000/home')
+CORS(app, origins='http://localhost:3000/')
 
 client = pymongo.MongoClient("mongodb+srv://ben:schedulesorcerer1@schedulesorcerery.b4wjqxl.mongodb.net/?retryWrites=true&w=majority")
 db = client["UserInformation"]
@@ -26,7 +26,8 @@ def login():
         user['_id'] = str(user['_id'])
         user_email = email
         user_password = password
-        return jsonify({'message': 'Login successful', 'user': user}), 200
+        exp = user.get('experience', 0)
+        return jsonify({'message': 'Login successful', 'exp': exp}), 200
     else:
         return jsonify({'error': 'Invalid email or password'}), 401
     
@@ -39,26 +40,29 @@ def signup():
 
     return jsonify({'message': 'Signup successful'}), 200
 
-@app.route('/grab_exp', methods=['GET'])
+@app.route('/grab_exp', methods=['POST'])
 def grab_exp():
-    # grab the session user email and password for datbase check
-    global user_email
-    global user_password
-    user = login_collection.find_one({'email': user_email, 'password': user_password})
-    # check to see if the email and password are correct for the current session user
-    print({user_email} + " " + {user_password})
-    if user:
-        experience = user.get('experience', 0)
-        return jsonify({'experience': experience}), 200
+    email = request.headers.get('email')
+    password = request.headers.get('password')
+    
+    if email and password:
+        user = login_collection.find_one({'email': email, 'password': password})
+        
+        if user:
+            experience = user.get('experience', 0)
+            return jsonify({'experience': experience}), 200
+        else:
+            return jsonify({'error': 'User not found or invalid credentials'}), 404
     else:
-        return jsonify({'error': 'User not found or invalid credentials'}), 404
+        return jsonify({'error': 'Email or password not provided in headers'}), 400
+
 
 @app.route('/store_exp', methods=['POST'])
 def experienceStore():
-    global user_email
-    global user_password
+    email = request.json.get('email')
+    password = request.json.get('password')
     exp = request.json.get('experience')
-    user = login_collection.find_one({'email': user_email, 'password': user_password})
+    user = login_collection.find_one({'email': email, 'password': password})
     if user:
         user.insert_one('experience', exp)
         return jsonify({'experience': exp}), 200

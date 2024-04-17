@@ -2,7 +2,7 @@ import React from 'react';
 import './ProgressBar.css';
 
 const ProgressBar = (props) => {
-    const { bgcolor, experience } = props;
+    const { bgcolor, completed } = props;
 
     const containerStyles = {
         height: '20px',

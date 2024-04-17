@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../Components/navbar'; 
 import './HomePage.css';
 
 import Schedule from './Schedule';
 
 const HomePage = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const exp = queryParams.get('exp');
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-    const [totalExp, setTotalExp] = useState(0);
+    const [totalExp, setTotalExp] = useState(exp || 0); 
     const [level, setLevel] = useState(0);
-    fetchExperience();
+    const [setDate] = useState(0);
+    
+    useEffect(() => {
+        setTotalExp(exp || 0);
+    }, [exp]);
+
     const onChange = (newDate) => {
         setDate(newDate);
     };

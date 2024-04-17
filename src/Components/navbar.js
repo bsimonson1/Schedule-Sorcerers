@@ -2,42 +2,39 @@ import React, { useState, useEffect } from "react";
 import './navbar.css';
 import ProgressBar from '../Components/ProgressBar';
 
-const Navbar = () => {
+const Navbar = ({ userEmail, userPassword }) => {
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
-
-    const testData = [
-        { bgcolor: "#4a5899", completed: expValue }, //color of filling of experience bar
-      ];
-
+    const level = 0;
     const [experience, setExperience] = useState(0);
    
-    // toggle burger menu change
-        // const fetchExperience = async () => {
-        //     try {
-        //         const response = await fetch('/grab_exp', {
-        //             method: 'GET',
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //         });
-        //         if (response.ok) {
-        //             const data = await response.json();
-        //             setExperience(data.experience);
-        //         } else {
-        //             console.error('Failed to fetch experience:', response.status);
-        //         }
-        //     } catch (error) {
-        //         console.error('Error:', error);
-        //     }
-        // };
-
-    // const testData = [
-    //     { bgcolor: "#6a1b9a", experience: experience||0 }, //color of filling of experience bar
-    //   ];
+    useEffect(() => {
+        const fetchExperience = async () => {
+            try {
+                const response = await fetch('/grab_exp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        email: userEmail, 
+                        password: userPassword 
+                    },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setExperience(data.experience);
+                } else {
+                    console.error('Failed to fetch experience:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
     
+        fetchExperience();
+    }, [userEmail, userPassword]);
+
     const updateMenu = () => {
         if(!isMenuClicked) {
             setBurgerClass("burger-bar clicked");
@@ -49,7 +46,8 @@ const Navbar = () => {
         }
         setIsMenuClicked(!isMenuClicked);
     };
-return (
+
+    return (
         <div>
             <nav>
                 <div className="burger-menu" onClick={updateMenu}>
@@ -58,15 +56,10 @@ return (
                     <div className={burger_class}></div>
                 </div>
                 <div className="experienceBar">
-                    <p><b>Level:</b> {level} / <b>Exp:</b> {expValue}/100</p>
-                    <progress id="exp" max="100" value={expValue}/>
-                    /*{/*testData.map((item, idx) => (
-                    <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
-                    ))*/}
-                
-                    <ProgressBar bgcolor="#6a1b9a" experience={experience} />
+                    <p><b>Level:</b> {level} / <b>Exp:</b> {experience}/100</p>
+                    <progress id="exp" max="100" value={experience}/>
+                    <ProgressBar bgcolor="#6a1b9a" completed={experience} />
                 </div>
-                {/*</div>*/}
             </nav>
 
             <div className={menu_class}>
@@ -82,6 +75,5 @@ return (
         </div>
     );
 };
-
 
 export default Navbar;
