@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import './navbar.css';
 
 import { useNavigate } from 'react-router-dom';
-const Navbar = ({expValue, level}) => {
+const Navbar = ({expValue, userEmail, userPassword}) => {
+    const navigate = useNavigate();
 
-const Navbar = ({ userEmail, userPassword }) => {
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
