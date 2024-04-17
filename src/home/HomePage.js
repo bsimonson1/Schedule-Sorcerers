@@ -12,9 +12,7 @@ const HomePage = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [totalExp, setTotalExp] = useState(exp || 0); 
     const [level, setLevel] = useState(0);
-    const [setDate] = useState(0);
-    const [error, setError] = useState('');
-
+  
     // useEffect(() => {
     //   const fetchExperience = async () => {
     //     try {
@@ -47,10 +45,6 @@ const HomePage = () => {
         setTotalExp(exp || 0);
     }, [exp]);
 
-    const onChange = (newDate) => {
-        setDate(newDate);
-    };
-
     const toggleNavbar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
@@ -63,10 +57,6 @@ const HomePage = () => {
     const updateExp = (expValue) => {
         calcLevel(expValue);
         setTotalExp(expValue%100); //replace with real function later
-    };
-    
-    const mainContentStyle = {
-        marginLeft: isNavbarOpen ? '250px' : '0', 
     };
 
     return (
