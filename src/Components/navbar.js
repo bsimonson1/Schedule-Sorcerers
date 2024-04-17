@@ -2,38 +2,13 @@ import React, { useState, useEffect } from "react";
 import './navbar.css';
 import ProgressBar from '../Components/ProgressBar';
 
-const Navbar = ({ userEmail, userPassword }) => {
+const Navbar = () => {
     // to change burger classes
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
     const level = 0;
     const [experience, setExperience] = useState(0);
-   
-    useEffect(() => {
-        const fetchExperience = async () => {
-            try {
-                const response = await fetch('/grab_exp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        email: userEmail, 
-                        password: userPassword 
-                    },
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setExperience(data.experience);
-                } else {
-                    console.error('Failed to fetch experience:', response.status);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-    
-        fetchExperience();
-    }, [userEmail, userPassword]);
 
     const updateMenu = () => {
         if(!isMenuClicked) {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({ userEmail, userPassword }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,19 +20,9 @@ const LoginPage = ({ userEmail, userPassword }) => {
       const data = await response.json();
   
       if (response.ok) {
-        const { exp } = data;
-        
-        const expResponse = await fetch('/grab_exp', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            email,  
-            password
-          }
-        });
-        const expData = await expResponse.json();
-        const totalExp = expData.experience || 0;
-        navigate(`/home?exp=${totalExp}`);
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        navigate("/home");
       } else {
         setError(data.error);
       }
