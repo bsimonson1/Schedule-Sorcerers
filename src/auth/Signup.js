@@ -34,6 +34,8 @@ const SignupPage = () => {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem('exp', data.exp);
+        localStorage.setItem('level', 0); //fix later
         navigate('/home');
       } else {
         setError(data.error);

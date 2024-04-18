@@ -10,7 +10,7 @@ const HomePage = () => {
     const queryParams = new URLSearchParams(location.search);
     const exp = queryParams.get('exp');
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-    const [totalExp, setTotalExp] = useState(exp || 0); 
+    const [totalExp, setTotalExp] = useState(parseInt(exp) || 0); 
     const [level, setLevel] = useState(0);
   
     // useEffect(() => {
@@ -42,8 +42,33 @@ const HomePage = () => {
     // }, []);
 
     useEffect(() => {
-        setTotalExp(exp || 0);
+        setTotalExp(localStorage.getItem('exp'));
     }, [exp]);
+    /*
+    useEffect(() => {
+        setLevel(localStorage.getItem('level'));
+    }, [level]);
+    */
+
+    const storeExp = async (newExp) => {
+        try {
+            const response = await fetch('/store', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ experience: newExp })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data.message);
+            } else {
+                console.error(data.error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const toggleNavbar = () => {
         setIsNavbarOpen(!isNavbarOpen);
@@ -51,12 +76,21 @@ const HomePage = () => {
 
     const calcLevel = (exp) => {
         //replace with real equation later
-        setLevel(Math.floor(exp/100));
+        let currLevel = level;
+        if (exp > 100){
+            currLevel = currLevel + Math.floor(exp/100);
+            //currLevel++;
+        }
+        setLevel(currLevel);
+        //localStorage.setItem('level', currLevel);
     }
 
     const updateExp = (expValue) => {
+        console.log("exp value " + expValue);
         calcLevel(expValue);
         setTotalExp(expValue%100); //replace with real function later
+        localStorage.setItem('exp', expValue%100);
+        storeExp(expValue%100);
     };
 
     return (
@@ -69,11 +103,12 @@ const HomePage = () => {
             />
             <div className="homepage-container">
                 <div className='calendar-container'>
-                    {error ? (
+                    <Schedule changeExpValue={updateExp} currExp={totalExp}/>
+                    {/*error ? (
                         <p>Error: {error}</p>
                     ) : (
-                        <Schedule changeExpValue={updateExp}/>
-                    )}
+                        
+                    )*/}
                 </div>
             </div>
         </div>

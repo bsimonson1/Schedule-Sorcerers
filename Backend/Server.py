@@ -47,7 +47,8 @@ def login():
     if user and bcrypt.check_password_hash(user['password'], password):
         session['user_id'] = str(user['_id'])
         exp = user.get('experience', 0)
-        return jsonify({'message': 'Login successful', 'exp': exp}), 200
+        level = user.get('level', 0)
+        return jsonify({'message': 'Login successful', 'exp': exp, 'level': level}), 200
     else:
         return jsonify({'error': 'Invalid email or password'}), 401
 
@@ -61,7 +62,7 @@ def signup():
     if existing_user:
         return jsonify({'error': 'Email already exists'}), 400
 
-    login_collection.insert_one({'email': email, 'password': hashed_password, 'experience': 0})
+    login_collection.insert_one({'email': email, 'password': hashed_password, 'experience': 0, 'level': 0})
     return jsonify({'message': 'Signup successful'}), 200
 
 @app.route('/grab', methods=['GET','OPTIONS'])
@@ -87,6 +88,19 @@ def store_exp():
             return jsonify({'message': 'Experience stored successfully'}), 200
         else:
             return jsonify({'error': 'Failed to store experience'}), 500
+    else:
+        return jsonify({'error': 'User not authenticated'}), 403
+    
+@app.route('/store-level', methods=['POST'])
+def store_level():
+    user_id = session.get('user_id')
+    if user_id:
+        level = request.json.get('level')
+        result = login_collection.update_one({'_id': ObjectId(user_id)}, {'$set': {'level': level}})
+        if result.modified_count == 1:
+            return jsonify({'message': 'Level stored successfully'}), 200
+        else:
+            return jsonify({'error': 'Failed to store level'}), 500
     else:
         return jsonify({'error': 'User not authenticated'}), 403
 

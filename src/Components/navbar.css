@@ -35,7 +35,7 @@ nav {
 .menu {
     display:flex;
     flex-direction: column;
-    width: 20%;
+    width: 30%;
     height: calc(100vh - 4em); /* Adjust height to account for the top bar */
     background-color: rgb(154, 181, 240);
     position: absolute;
@@ -155,3 +155,9 @@ progress::-webkit-progress-value {
     background-color: #c61414;
 }
 
+.username {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

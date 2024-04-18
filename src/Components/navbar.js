@@ -10,7 +10,7 @@ const Navbar = ({expValue, level, userEmail, userPassword}) => {
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
     const userLevel = level;
-    const [experience, setExperience] = useState(0);
+    const [experience, setExperience] = useState();
 
     const updateMenu = () => {
         if(!isMenuClicked) {
@@ -41,7 +41,7 @@ const Navbar = ({expValue, level, userEmail, userPassword}) => {
             <div className={menu_class}>
                 <div className="sidebar-top-section">
                     <div className="username-settings">
-                        <div className="username">Username</div>
+                        <div className="username"><b>Email:&nbsp;</b>{localStorage.getItem('email')} </div>
                         <div className ="cogWheel"></div>
                     </div>
                 </div>

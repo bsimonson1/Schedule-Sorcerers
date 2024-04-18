@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Views } from 'react-big-calendar';
 
@@ -9,13 +9,16 @@ import AddEventModal from '../Components/AddEventModal';
 import DeleteEventModal from '../Components/DeleteEventModal';
 
 
-const Schedule = ({changeExpValue}) => {
+const Schedule = ({changeExpValue, currExp}) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [events, setEvents] = useState(ExampleEvents);
     const dialogRefAdd = useRef(null);
     const dialogRefDelete = useRef(null);
     const [currentEvent, setCurrentEvent] = useState(events[0]);
-    const [totalExp, setTotalExp] =useState(0); //replace later
+    const [totalExp, setTotalExp] =useState(parseInt(currExp) || 0); //replace later
+    useEffect(() => {
+      setTotalExp(currExp);
+    }, [currExp]);
 
     /*THIS SECTION IS FOR ADDING THE EVENTS*/
     const openModal = () => {
@@ -71,7 +74,10 @@ const Schedule = ({changeExpValue}) => {
 
     const handleEventCompletion = () => {
       //fix later
-      const newTotalExp = totalExp + calculateExp(currentEvent);
+      console.log("total exp " + totalExp);
+      const newTotalExp = parseInt(totalExp) + parseInt(calculateExp(currentEvent));
+      console.log("new total exp " + newTotalExp);
+      //const newTotalExp = localStorage.getItem('exp') + calculateExp(currentEvent);
       setTotalExp(newTotalExp);
       changeExpValue(newTotalExp);
       const newEvents = events.filter((event) => event.id !== currentEvent.id);
