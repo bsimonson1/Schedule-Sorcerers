@@ -22,6 +22,8 @@ const LoginPage = () => {
       if (response.ok) {
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
+        localStorage.setItem('exp', data.exp);
+        localStorage.setItem('level', 0); //fix later
         navigate("/home");
       } else {
         setError(data.error);
