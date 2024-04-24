@@ -1,5 +1,4 @@
 import React from 'react'
-
 export default function profiles({ Leaderboard }) {
     //Each profile is mapped and displayed as a flex containing the info from the "Item" function
   return (
@@ -20,14 +19,14 @@ function Item(data){
                         <div className="flex">
                             <div className="item">
                                 <div className="info">
-                                    <h3 className='name text-dark'>{value.name}</h3>  
-                                    <p>Score: {value.score}</p>  
+                                    <h3 className='name text-dark'>{index + 1}. {value.name}</h3>  
+                                    <p>Exp: {value.score}</p>  
                                     <span>Level: {value.level}</span> 
                                    {/*I might add another progress bar under the level*/} 
                                 </div>                                 
                             </div>
                         </div>
-                        <hr />
+                        
                     </div>
                 ))
             }

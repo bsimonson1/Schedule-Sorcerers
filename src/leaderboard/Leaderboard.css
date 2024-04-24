@@ -22,8 +22,8 @@ button:hover{
 
 #main{
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: left;
+        align-items: left;
         height: 100vh;
 }
 
@@ -62,8 +62,10 @@ button:hover{
 #profile{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
+    margin-left: 700px;
+    margin-top: 10px;
 }
 
 #profile .flex{
@@ -76,7 +78,7 @@ button:hover{
 
 #profile .flex .item{
     display: flex;
-    align-items: center;
+    align-items: left;
 }
 
 #profile .flex .info{
