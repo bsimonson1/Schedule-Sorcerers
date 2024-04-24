@@ -1,62 +1,39 @@
-* > * {
-    margin: 0;
-}
-
-button{
-    border: 1px solid var(--color-light);
-    padding: .5em 2em;
-    border-radius: 50px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-button:hover{
-    background-color: var(--color-dark);
-    color: var(--color-light);
-}
-
-:root{
-    --color-dark: #2C3131;
-    --color-light: #F3F3F2;
-}
-
-#main{
-        display: flex;
-        justify-content: left;
-        align-items: left;
-        height: 100vh;
-}
-
 .board {
-    text-align: center;
-}
-
-.board .leaderboard{
-    margin-bottom: 1em;
-}
-
-.board .duration{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 1em;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(#4a5899 10%, #5788bd 70%, #64b6e0);
 }
 
-.board .duration > button{
-    border: 1px solid var(--color-light);
-    padding: .5em 2em;
-    border-radius: 50px;
+.leaderboard {
+    background-color: white;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    border-radius: 20px;
+}
+
+button {
+    width: 200px;
+    padding: 10px;
+    border: 1.5px solid #fff;
+    border-radius: 20px;
     background-color: transparent;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 2%;
 }
 
-.board .duration > button:hover{
-    background-color: var(--color-dark);
-    color: var(--color-light);
-}
-
-.active{
-    background-color: var(--color-dark);
-    color: var(--color-light);
+button:hover {
+    background-color: #fff;
+    color: #4a5899;
 }
 
 #profile{
@@ -64,16 +41,7 @@ button:hover{
     flex-direction: column;
     justify-content: left;
     align-items: left;
-    margin-left: 700px;
     margin-top: 10px;
-}
-
-#profile .flex{
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    text-align: left;
-    margin-bottom: 2em;
 }
 
 #profile .flex .item{
@@ -82,9 +50,5 @@ button:hover{
 }
 
 #profile .flex .info{
-   padding: 1em;
-}
-
-.text-dark{
-    color: var(--color-dark);
+   padding: .5em;
 }
