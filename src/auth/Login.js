@@ -6,6 +6,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [use2FA, setUse2FA] = useState(false);
   const navigate = useNavigate();
 
   const loginAuthentication = async () => {
@@ -20,11 +21,14 @@ const LoginPage = () => {
       const data = await response.json();
   
       if (response.ok) {
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-        localStorage.setItem('exp', data.exp);
-        localStorage.setItem('level', 0); //fix later
-        navigate("/home");
+        if (use2FA) {
+          navigate("/verify", { state: { email, secret: data.secret } }); 
+        } else {
+          localStorage.setItem('email', email);
+          localStorage.setItem('exp', data.exp);
+          localStorage.setItem('level', 0); //fix later
+          navigate("/home");
+        }
       } else {
         setError(data.error);
       }
@@ -45,7 +49,7 @@ const LoginPage = () => {
       <div className="left-side-bar">
         <h2>Welcome Back!</h2>
         <div className="small-line-purple"/>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
@@ -54,8 +58,17 @@ const LoginPage = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={use2FA}
+                onChange={() => setUse2FA(!use2FA)}
+              /> Enable 2-Factor Authentication
+            </label>
+          </div>
           {error && <p className="error-message">{error}</p>}
-          <button onClick={loginAuthentication} type="button">Login</button>
+          <button type="submit" onClick={loginAuthentication}>Login</button>
         </form>
       </div>
     </div>

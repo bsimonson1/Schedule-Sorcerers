@@ -1,19 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LoginPage from './auth/Login';
 import SignupPage from './auth/Signup';
 import HomePage from './home/HomePage';
-import Board from './leaderboard/Leaderboard'
+import Board from './leaderboard/Leaderboard';
+import VerifyPage from './auth/verify';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/' Component={LoginPage} />
-        <Route exact path='/signup' Component={SignupPage} />
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
         <Route path='/home' element={<HomePage />} />
-        <Route exact path='/leaderboard' Component={Board} />
+        <Route path='/verify' element={<VerifyPage />} />
+        <Route path='/leaderboard' element={<Board />} />
       </Routes>
     </BrowserRouter>
   );
