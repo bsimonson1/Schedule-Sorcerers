@@ -19,13 +19,14 @@ export default function Board() {
   return (
     <div className="board">
       <button onClick={goBack}>Back To Home Page</button>
-        <h1 className='leaderboard'>Leaderboard</h1>
+      <div className='leaderboard'>
+        <h1>Leaderboard</h1>
 
         <div className="duration">
         </div>
 
         <Profiles Leaderboard={sortScores(Leaderboard)}></Profiles>
-
+      </div>
     </div>
   )
 }
