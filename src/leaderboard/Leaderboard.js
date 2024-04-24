@@ -22,9 +22,6 @@ export default function Board() {
         <h1 className='leaderboard'>Leaderboard</h1>
 
         <div className="duration">
-            <button onClick={handleClick}>Score</button>
-            <button onClick={handleClick}>Name</button>
-            <button onClick={handleClick}>Date</button>
         </div>
 
         <Profiles Leaderboard={sortScores(Leaderboard)}></Profiles>
